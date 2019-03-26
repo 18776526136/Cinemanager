@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         setTitleMenu();
     }
+
     public void setTitleMenu(){
         layoutMenu=findViewById(R.id.bar_title_layout_menu);
         layoutMenu.setVisibility(View.GONE);
