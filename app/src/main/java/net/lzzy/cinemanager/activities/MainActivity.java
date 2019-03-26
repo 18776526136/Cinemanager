@@ -1,6 +1,7 @@
 package net.lzzy.cinemanager.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.SearchView;
 import android.widget.TextView;
 
 import net.lzzy.cinemanager.R;
+import net.lzzy.cinemanager.fragments.CinemasFragment;
+import net.lzzy.cinemanager.fragments.OrdersFragment;
 
 /**
  * @author Administrator
@@ -18,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private LinearLayout layoutMenu;
     private TextView tvTitle;
     private SearchView search;
+    private FragmentManager manager=getSupportFragmentManager();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvTitle=findViewById(R.id.bar_title_tv_title);
         tvTitle.setText(R.string.bar_title_menu_order);
         search=findViewById(R.id.bat_title_search);
-        findViewById(R.id.bar_title_tv_exit).setOnClickListener(v ->{
-            System.exit(0);
-        });
+        findViewById(R.id.bar_title_tv_exit).setOnClickListener(v -> System.exit(0));
         findViewById(R.id.bar_title_tv_add_cinema).setOnClickListener(this);
         findViewById(R.id.bar_title_tv_add_order).setOnClickListener(this);
         findViewById(R.id.bar_title_tv_view_cinema).setOnClickListener(this);
@@ -50,30 +52,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.bar_title_img_menu:
-                break;
-            case R.id.bar_title_tv_exit:
-                layoutMenu.setVisibility(View.GONE);
-                break;
             case R.id.bar_title_tv_add_cinema:
                 tvTitle.setText(R.string.bar_title_menu_add_cinema);
-                layoutMenu.setVisibility(View.GONE);
                 break;
             case R.id.bar_title_tv_add_order:
                 tvTitle.setText(R.string.bar_title_menu_add_order);
-                layoutMenu.setVisibility(View.GONE);
                 break;
             case R.id.bar_title_tv_view_cinema:
                 tvTitle.setText(R.string.bar_title_menu_view_cinema);
-                layoutMenu.setVisibility(View.GONE);
+                manager.beginTransaction()
+                        .replace(R.id.relativ_fragments,new CinemasFragment())
+                        .commit();
                 break;
             case R.id.bar_title_tv_view_order:
                 tvTitle.setText(R.string.bar_title_menu_order);
-                layoutMenu.setVisibility(View.GONE);
+                manager.beginTransaction()
+                        .replace(R.id.relativ_fragments,new OrdersFragment())
+                        .commit();
                 break;
             default:
                 break;
         }
-
+        layoutMenu.setVisibility(View.GONE);
     }
 }
