@@ -1,3 +1,22 @@
 <resources>
-    <string name="app_name">Cinemanager</string>
+    <string name="app_name">Filmanager</string>
+    <string name="bar_title_menu_order">我的订单</string>
+    <string name="bar_title_menu_add_order">添加订单</string>
+    <string name="bar_title_menu_view_cinema">查看影院</string>
+    <string name="bar_title_menu_add_cinema">添加影院</string>
+    <string name="bar_title_menu_exit">退出Exit</string>
+    <string name="bar_title_menu_x">新影院</string>
+    <string name="bar_title_menu_dy">新电影</string>
+    <string name="bar_title_location">广西壮族自治区柳州市鱼峰区</string>
+    <string name="dialog_et_name">请输入影院名称</string>
+    <string name="dialog_but_preservation">保存</string>
+    <string name="dialog_but_cancel">取消</string>
+    <string name="dialog_x">选择地区:</string>
+    <string name="dialog_zoon">没有数据，请加数据</string>
+    <string name="dialog_et_names">请输入电影名称</string>
+    <string name="dialog_time">选择时间</string>
+    <string name="dialog_order_et_ticket">请输入票价</string>
+    <string name="dialog_order_but_Preservation">保存</string>
+    <string name="dialog_order_tv_time">2019-04-19 10:25:00</string>
+    <string name="dialog_order_but_code">生成二维码</string>
 </resources>
