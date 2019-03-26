@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        layoutMenu.setVisibility(View.GONE);
         switch (v.getId()) {
             case R.id.bar_title_tv_add_cinema:
                 tvTitle.setText(R.string.bar_title_menu_add_cinema);
@@ -73,6 +74,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 break;
         }
-        layoutMenu.setVisibility(View.GONE);
+
     }
 }
