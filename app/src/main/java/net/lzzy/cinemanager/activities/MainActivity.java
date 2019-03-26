@@ -15,8 +15,6 @@ import net.lzzy.cinemanager.R;
  * @author Administrator
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    public static final String NEW_CINEMA = "newCinema";
-    public static final String MENU_ORDER="我的订单";
     private LinearLayout layoutMenu;
     private TextView tvTitle;
     private SearchView search;
