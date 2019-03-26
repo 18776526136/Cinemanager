@@ -29,11 +29,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void setTitleMenu(){
         layoutMenu=findViewById(R.id.bar_title_layout_menu);
         layoutMenu.setVisibility(View.GONE);
-        findViewById(R.id.bar_title_img_menu).setOnClickListener(this);
+        findViewById(R.id.bar_title_img_menu).setOnClickListener(v ->{
+            int visible=layoutMenu.getVisibility()==View.VISIBLE?View.GONE:View.VISIBLE;
+            layoutMenu.setVisibility(visible);
+        });
+
         tvTitle=findViewById(R.id.bar_title_tv_title);
         tvTitle.setText(R.string.bar_title_menu_order);
         search=findViewById(R.id.bat_title_search);
-        findViewById(R.id.bar_title_tv_exit).setOnClickListener(this);
+        findViewById(R.id.bar_title_tv_exit).setOnClickListener(v ->{
+            System.exit(0);
+        });
         findViewById(R.id.bar_title_tv_add_cinema).setOnClickListener(this);
         findViewById(R.id.bar_title_tv_add_order).setOnClickListener(this);
         findViewById(R.id.bar_title_tv_view_cinema).setOnClickListener(this);
@@ -45,8 +51,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bar_title_img_menu:
-                int visible=layoutMenu.getVisibility()==View.VISIBLE?View.GONE:View.VISIBLE;
-                layoutMenu.setVisibility(visible);
                 break;
             case R.id.bar_title_tv_exit:
                 layoutMenu.setVisibility(View.GONE);
