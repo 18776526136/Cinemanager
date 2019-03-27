@@ -1,14 +1,5 @@
 package net.lzzy.cinemanager.fragments;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import net.lzzy.cinemanager.R;
 
 /**
@@ -16,13 +7,14 @@ import net.lzzy.cinemanager.R;
  * Description:
  */
 
-public class AddOrdersFragment extends Fragment {
-    public AddOrdersFragment(){}
-
-    @Nullable
+public class AddOrdersFragment extends BaseFragment {
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_add_orders,null);
-        return view;
+    public int getLayoutRes() {
+        return R.layout.fragment_add_orders;
+    }
+
+    @Override
+    protected void populate() {
+
     }
 }

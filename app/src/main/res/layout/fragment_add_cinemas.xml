@@ -1,8 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bar_title_menu_x"
+        android:textSize="40sp"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:background="@color/bank_FF6C6C6C" />
+    <LinearLayout
+        android:id="@+id/dialog_layout_ll"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:gravity="center_vertical">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+            android:text="@string/dialog_x"
+            android:textSize="20sp" />
 
+        <TextView
+            android:id="@+id/dialog_tv_region"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="4"
+            android:clickable="true"
+            android:textSize="20sp"
+            android:gravity="center_vertical"
+            android:text="@string/bar_title_location"
+            android:textColor="@color/colorPrimary" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/color3"/>
+    <EditText
+        android:id="@+id/dialog_et_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="@string/dialog_et_name"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/dialog_but_preservation"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_but_preservation"/>
+
+        <Button
+            android:id="@+id/dialog_but_cancel"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_but_cancel"/>
+    </LinearLayout>
 </LinearLayout>

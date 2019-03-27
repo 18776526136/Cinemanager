@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="bar_height">50dp</dimen>
+    <dimen name="layoutMargin">20dp</dimen>
+    <dimen name="listMargin">8dp</dimen>
+    <dimen name="titleSize">18sp</dimen>
+    <dimen name="numberSize">20sp</dimen>
+    <dimen name="roundCorner">6dp</dimen>
+    <dimen name="shadow">4dp</dimen>
 </resources>

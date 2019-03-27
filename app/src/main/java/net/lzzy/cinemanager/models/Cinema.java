@@ -15,6 +15,16 @@ public class Cinema extends BaseEntity implements Sqlitable {
     private String province;
     private String city;
     private String area;
+    public Cinema() {
+    }
+
+    public Cinema(String name, String location, String province, String city, String area) {
+        this.name = name;
+        this.location = location;
+        this.province = province;
+        this.city = city;
+        this.area = area;
+    }
 
     public String getName() {
         return name;
