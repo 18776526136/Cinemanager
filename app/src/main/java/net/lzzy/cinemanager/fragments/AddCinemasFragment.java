@@ -1,6 +1,7 @@
 package net.lzzy.cinemanager.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,6 +17,8 @@ import net.lzzy.cinemanager.R;
 import net.lzzy.cinemanager.models.Cinema;
 import net.lzzy.cinemanager.models.CinemaFactory;
 
+import java.util.zip.Inflater;
+
 /**
  * Created by lzzy_gxy on 2019/3/27.
  * Description:
@@ -28,6 +31,10 @@ public class AddCinemasFragment extends BaseFragment implements View.OnClickList
     private String areas="鱼峰区";
     private CinemaFactory cinemaFacotry;
     private JDCityPicker jdCityPicker;
+    //3.声明接口对象
+    private OnFragmentInteractionListener listener;
+    //(3)声明接口对象
+    private OnCinemaCreatedListener cinemaCreate;
 
     @Override
     public int getLayoutRes() {
@@ -38,6 +45,8 @@ public class AddCinemasFragment extends BaseFragment implements View.OnClickList
 
     @Override
     protected void populate() {
+        listener.hideSearch();
+        getActivity().findViewById(R.id.bar_title_search).setVisibility(View.GONE);
         region = find(R.id.dialog_tv_region);
         find(R.id.dialog_but_preservation).setOnClickListener(this);
         find(R.id.dialog_but_cancel).setOnClickListener( this);
@@ -56,6 +65,7 @@ public class AddCinemasFragment extends BaseFragment implements View.OnClickList
                 seveCinema();
                 break;
             case R.id.dialog_but_cancel:
+                cinemaCreate.cancelAddCinema();
                 break;
         }
     }
@@ -68,6 +78,7 @@ public class AddCinemasFragment extends BaseFragment implements View.OnClickList
             Cinema cinema=  new Cinema(isNmae,address,provinces,citys,areas);
             cinemaFacotry = CinemaFactory.getInstance();
             cinemaFacotry.addCinema(cinema);
+            cinemaCreate.saveCinema(cinema);
             Toast.makeText(getActivity(),"添加成功",Toast.LENGTH_SHORT).show();
 
         }
@@ -94,4 +105,41 @@ public class AddCinemasFragment extends BaseFragment implements View.OnClickList
         });
 
     }
+
+    //6.实现方法
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden){
+            listener.hideSearch();
+        }
+    }
+
+    //4(4).初始化
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            listener= (OnFragmentInteractionListener) context;
+            cinemaCreate= (OnCinemaCreatedListener) context;
+        }catch (ClassCastException e){
+            throw new ClassCastException(context.toString()
+                    +"必需实现OnFragmentInteractionListener&OnCinemaCreatedListener ");
+        }
+    }
+    //5(5).销毁
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener=null;
+        cinemaCreate=null;
+    }
+
+    public interface OnCinemaCreatedListener{
+        /** 取消*/
+        void cancelAddCinema();
+        /**保存*/
+        void  saveCinema(Cinema cinema);
+    }
+
 }

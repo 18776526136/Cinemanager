@@ -17,9 +17,17 @@ import java.util.List;
  * Created by lzzy_gxy on 2019/3/26.
  * Description:
  */
+
 public class CinemasFragment extends BaseFragment {
     private static List<Cinema> cinemas=new ArrayList<>();
     private CinemaFactory factory=CinemaFactory.getInstance();
+    private GenericAdapter<Cinema> adapter;
+    public Cinema cinema;
+    public CinemasFragment(){ }
+    public CinemasFragment(Cinema cinema){
+        this.cinema=cinema;
+    }
+
 
 
     @Override
@@ -33,7 +41,7 @@ public class CinemasFragment extends BaseFragment {
         View empty=find(R.id.activity_cinemas_tv_none);
         lv.setEmptyView(empty);
         cinemas=factory.get();
-        GenericAdapter<Cinema> adapter = new GenericAdapter<Cinema>(getActivity(),
+        adapter = new GenericAdapter<Cinema>(getActivity(),
                 R.layout.cinema_item,cinemas) {
             @Override
             public void populate(ViewHolder viewHolder, Cinema cinema) {
@@ -53,7 +61,11 @@ public class CinemasFragment extends BaseFragment {
             }
         };
         lv.setAdapter(adapter);
-
-
+        if (cinema!=null){
+            save(cinema);
+        }
+    }
+    public void save(Cinema cinema){
+        adapter.add(cinema);
     }
 }

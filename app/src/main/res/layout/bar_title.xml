@@ -27,7 +27,7 @@
             android:text="@string/bar_title_menu_order" />
 
         <SearchView
-            android:id="@+id/bat_title_search"
+            android:id="@+id/bar_title_search"
             android:queryHint="1111"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
