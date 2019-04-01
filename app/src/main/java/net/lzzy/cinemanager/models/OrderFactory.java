@@ -62,12 +62,23 @@ public class OrderFactory {
     }
 
     public boolean addOrder(Order order){
-        repository.insert(order);
-        return true;
+        try {
+            if (!isCinemaExiste(order)){
+                repository.insert(order);
+                return true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return false;
     }
 
     public boolean delete(Order order){
         repository.delete(order);
         return true;
+    }
+    private boolean isCinemaExiste(Order order){
+        return searchOrders(order.toString()).size()>0;
     }
 }

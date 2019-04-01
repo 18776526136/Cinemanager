@@ -1,6 +1,7 @@
 package net.lzzy.cinemanager.fragments;
 
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ListView;
 
@@ -36,6 +37,17 @@ public class CinemasFragment extends BaseFragment {
     }
 
     @Override
+    public void search(String kw) {
+        cinemas.clear();
+        if (TextUtils.isEmpty(kw)){
+            cinemas.addAll(factory.get());
+        }else {
+            cinemas.addAll(factory.searchCinemas(kw));
+        }
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
     protected void populate() {
         ListView lv=find(R.id.activity_cinemas_lv);
         View empty=find(R.id.activity_cinemas_tv_none);
@@ -68,4 +80,5 @@ public class CinemasFragment extends BaseFragment {
     public void save(Cinema cinema){
         adapter.add(cinema);
     }
+
 }

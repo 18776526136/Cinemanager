@@ -1,6 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/bar_title_menu_dy"
+        android:textSize="40sp"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:background="@color/bank_FF6C6C6C" />
+    <EditText
+        android:id="@+id/dialog_order_et_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="@string/dialog_et_names" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+            android:text="@string/dialog_time"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/dialog_order_tv_time"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="4"
+            android:clickable="true"
+            android:textSize="20sp"
+            android:gravity="center_vertical"
+            android:text="@string/dialog_order_tv_time"
+            android:textColor="@color/colorPrimary" />
+    </LinearLayout>
+
+    <Spinner
+        android:id="@+id/dialog_order_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        />
+
+    <EditText
+        android:id="@+id/dialog_order_et_ticket"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="@string/dialog_order_et_ticket" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/dialog_order_but_code"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:layout_marginTop="5dp"
+            android:text="@string/dialog_order_but_code"/>
+        <Button
+            android:id="@+id/dialog_order_but_preservation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:layout_marginTop="5dp"
+            android:text="@string/dialog_order_but_Preservation"/>
+        <Button
+            android:id="@+id/dialog_order_but_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:layout_marginTop="5dp"
+            android:text="@string/dialog_but_cancel"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/dialog_order_iv_code"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp" />
 
 </LinearLayout>

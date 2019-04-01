@@ -44,6 +44,11 @@ public class AddCinemasFragment extends BaseFragment implements View.OnClickList
     }
 
     @Override
+    public void search(String kw) {
+
+    }
+
+    @Override
     protected void populate() {
         listener.hideSearch();
         getActivity().findViewById(R.id.bar_title_search).setVisibility(View.GONE);
@@ -77,7 +82,7 @@ public class AddCinemasFragment extends BaseFragment implements View.OnClickList
         }else {
             Cinema cinema=  new Cinema(isNmae,address,provinces,citys,areas);
             cinemaFacotry = CinemaFactory.getInstance();
-            cinemaFacotry.addCinema(cinema);
+//            cinemaFacotry.addCinema(cinema);
             cinemaCreate.saveCinema(cinema);
             Toast.makeText(getActivity(),"添加成功",Toast.LENGTH_SHORT).show();
 

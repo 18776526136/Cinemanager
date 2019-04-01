@@ -24,6 +24,15 @@ public class Order extends BaseEntity implements Sqlitable {
     private String movieTime;
     private float price;
     private UUID cinemaId;
+    public Order(){
+
+    }
+    public Order(String movie,String movieTime,float price ,UUID cinemaId){
+        this.cinemaId=cinemaId;
+        this.movie=movie;
+        this.movieTime=movieTime;
+        this.price=price;
+    }
 
     public String getMovie() {
         return movie;
