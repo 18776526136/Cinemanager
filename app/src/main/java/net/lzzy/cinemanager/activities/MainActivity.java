@@ -51,6 +51,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (fragment instanceof CinemasFragment){
                         ((BaseFragment)fragment).search(kw);
                     }
+                    if (fragment instanceof OrdersFragment){
+                        ((BaseFragment) fragment).search(kw);
+                    }
                 }
                 return true;
             }
@@ -145,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         transaction.hide(addCinemFragment).show(cinemasFragment).commit();
         tvTitle.setText(titleArray.get(R.id.bar_title_tv_view_cinema));
+        search.setVisibility(View.VISIBLE);
 
     }
 
@@ -167,10 +171,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         transaction.hide(addCinemFragment).show(cinemasFragment).commit();
         tvTitle.setText(titleArray.get(R.id.bar_title_tv_view_cinema));
+        search.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void cancelAddOrder() {
+    public void cancelAddOrder(){
         Fragment addOrderFragment=fragmentArray.get(R.id.bar_title_tv_add_order);
         if (addOrderFragment==null){
             return;
@@ -184,6 +189,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         transaction.hide(addOrderFragment).show(orderFragment).commit();
         tvTitle.setText(titleArray.get(R.id.bar_title_tv_view_order));
+        search.setVisibility(View.VISIBLE);
 
     }
 
@@ -203,8 +209,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }else {
             ((OrdersFragment)ordersFragment).saveOrder(order);
         }
-
         transaction.hide(addOrderFragment).show(ordersFragment).commit();
         tvTitle.setText(titleArray.get(R.id.bar_title_tv_view_order));
+        search.setVisibility(View.VISIBLE);
     }
 }

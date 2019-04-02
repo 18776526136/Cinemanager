@@ -126,7 +126,7 @@ public class AddOrdersFragment extends BaseFragment  {
                 if (cinema!=null){
                     Order order=  new Order(namel, itmel1,Float.valueOf(ticketl),cinema.getId());
                      orderFacotry = OrderFactory.getInstance();
-                     orderFacotry.addOrder(order);
+//                     orderFacotry.addOrder(order);
                      orderCreate.saveOrder(order);
                 }
             }

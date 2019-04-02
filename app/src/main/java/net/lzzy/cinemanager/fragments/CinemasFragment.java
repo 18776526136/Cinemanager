@@ -25,11 +25,10 @@ public class CinemasFragment extends BaseFragment {
     private GenericAdapter<Cinema> adapter;
     public Cinema cinema;
     public CinemasFragment(){ }
+
     public CinemasFragment(Cinema cinema){
         this.cinema=cinema;
     }
-
-
 
     @Override
     public int getLayoutRes() {
@@ -77,8 +76,8 @@ public class CinemasFragment extends BaseFragment {
             save(cinema);
         }
     }
+
     public void save(Cinema cinema){
         adapter.add(cinema);
     }
-
 }

@@ -3,6 +3,7 @@ package net.lzzy.cinemanager.fragments;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -82,11 +83,12 @@ public class AddCinemasFragment extends BaseFragment implements View.OnClickList
         }else {
             Cinema cinema=  new Cinema(isNmae,address,provinces,citys,areas);
             cinemaFacotry = CinemaFactory.getInstance();
-//            cinemaFacotry.addCinema(cinema);
+//          cinemaFacotry.addCinema(cinema);
             cinemaCreate.saveCinema(cinema);
             Toast.makeText(getActivity(),"添加成功",Toast.LENGTH_SHORT).show();
 
         }
+
 
     }
 

@@ -1,7 +1,7 @@
 package net.lzzy.cinemanager.fragments;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -42,12 +42,18 @@ public class OrdersFragment extends BaseFragment {
 
     @Override
     public int getLayoutRes() {
-
         return R.layout.fragment_orders;
     }
 
     @Override
     public void search(String kw) {
+        orders.clear();
+        if (TextUtils.isEmpty(kw)){
+            orders.addAll(factory.get());
+        }else {
+            orders.addAll(factory.searchOrders(kw));
+        }
+        adapter.notifyDataSetChanged();
 
     }
 
@@ -56,38 +62,39 @@ public class OrdersFragment extends BaseFragment {
         ListView lv=find(R.id.activity_orders_lv);
         View empty=find(R.id.activity_order_tv_none);
         lv.setEmptyView(empty);
-
         orders.clear();
         orders=factory.get();
 
+
         adapter = new GenericAdapter<Order>(getActivity(),
                 R.layout.order_item,orders) {
+
             @Override
             public void populate(ViewHolder viewHolder, Order order) {
-               String location= String.valueOf(CinemaFactory.getInstance()
-                       .getById(order.getCinemaId().toString()));
-                viewHolder.setTextView(R.id.order_item_tv_movie,order.getMovie())
-                        .setTextView(R.id.order_item_tv_places,location);
-                Button btn=viewHolder.getView(R.id.order_item_btn);
-                btn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        new AlertDialog.Builder(getContext())
-                                .setTitle("删除确认")
-                                .setMessage("确定要删除项目吗？")
-                                .setNegativeButton("取消", null)
-                                .setPositiveButton("确认", (dialogInterface, i) -> adapter.remove(order)).show();
-                    }
-                });
-                viewHolder.getConvertView().setOnTouchListener(new ViewUtils.AbstractTouchHandler(){
+                    String location= String.valueOf(CinemaFactory.getInstance()
+                            .getById(order.getCinemaId().toString()));
+                    viewHolder.setTextView(R.id.order_item_tv_movie,order.getMovie())
+                            .setTextView(R.id.order_item_tv_places,location);
+                    Button btn=viewHolder.getView(R.id.order_item_btn);
+                    btn.setOnClickListener(v -> new AlertDialog.Builder(getContext())
+                            .setTitle("删除确认")
+                            .setMessage("确定要删除项目吗？")
+                            .setNegativeButton("取消", null)
+                            .setPositiveButton("确认", (dialogInterface, i) ->
+                            {   isDeleting=false;
+                                adapter.remove(order);
+                                btn.setVisibility(View.GONE);
+                            }).show());
 
-                    @Override
-                    public boolean handleTouch(MotionEvent event) {
-                        slideToDelete(event, order,btn);
-                        return true;
-                    }
-                });
-
+                    int visibility=isDeleting?View.VISIBLE:View.GONE;
+                    btn.setVisibility(visibility);
+                    viewHolder.getConvertView().setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            slideToDelete(event, order,btn);
+                            return true;
+                        }
+                    });
             }
 
             @Override
@@ -99,11 +106,8 @@ public class OrdersFragment extends BaseFragment {
             public boolean persistDelete(Order order) {
                 return factory.delete(order);
             }
-
         };
         lv.setAdapter(adapter);
-
-
     }
     public void saveOrder(Order order){
         adapter.add(order);
@@ -124,7 +128,7 @@ public class OrdersFragment extends BaseFragment {
                     if(btn.isShown()){
                         btn.setVisibility(View.GONE);
                         isDeleting=false;
-                    }else{
+                    }else {
                         clickOrder(order);
                     }
                 }
