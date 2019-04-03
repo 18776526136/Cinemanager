@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.View;
@@ -21,6 +22,7 @@ import net.lzzy.cinemanager.fragments.CinemasFragment;
 import net.lzzy.cinemanager.fragments.OnFragmentInteractionListener;
 import net.lzzy.cinemanager.fragments.OrdersFragment;
 import net.lzzy.cinemanager.models.Cinema;
+import net.lzzy.cinemanager.models.CinemaFactory;
 import net.lzzy.cinemanager.models.Order;
 import net.lzzy.cinemanager.utils.ViewUtils;
 
@@ -28,8 +30,9 @@ import net.lzzy.cinemanager.utils.ViewUtils;
  * @author Administrator
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener
-             , OnFragmentInteractionListener,AddCinemasFragment.OnCinemaCreatedListener,
-        AddOrdersFragment.OnOrderCreatedListener {
+        , OnFragmentInteractionListener,AddCinemasFragment.OnCinemaCreatedListener,
+        AddOrdersFragment.OnOrderCreatedListener, CinemasFragment.OnCinemaSelectedListener {
+    public static final String CINEMA_ID = "cinemaId";
     private LinearLayout layoutMenu;
     private TextView tvTitle;
     private SearchView search;
@@ -158,11 +161,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (addCinemFragment==null){
             return;
         }
+
         Fragment cinemasFragment=fragmentArray.get(R.id.bar_title_tv_view_cinema);
         FragmentTransaction transaction=manager.beginTransaction();
         if (cinemasFragment==null){
             //创建CinemaFragment的同时传Cinema
-            cinemasFragment=new CinemasFragment(cinema);
+            cinemasFragment=CinemasFragment.newInstance(cinema);
             fragmentArray.put(R.id.bar_title_tv_view_cinema,cinemasFragment);
             transaction.add(R.id.relativ_fragments,cinemasFragment);
         }else {
@@ -203,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FragmentTransaction transaction=manager.beginTransaction();
         if (ordersFragment==null){
             //创建OrderFragment的同时传Order
-            ordersFragment=new OrdersFragment(order);
+            ordersFragment=OrdersFragment.newInstance(order);
             fragmentArray.put(R.id.bar_title_tv_view_order,ordersFragment);
             transaction.add(R.id.relativ_fragments,ordersFragment);
         }else {
@@ -212,5 +216,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         transaction.hide(addOrderFragment).show(ordersFragment).commit();
         tvTitle.setText(titleArray.get(R.id.bar_title_tv_view_order));
         search.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onCinemaSelected(String cinemaId) {
+        Intent intent=new Intent(this,CinemaOrdersActivity.class);
+        intent.putExtra(CINEMA_ID,cinemaId);
+        startActivity(intent);
     }
 }

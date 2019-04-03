@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="net.lzzy.cinemanager">
 
-    <application android:name=".utils.AppUtils"
+    <application
+        android:name=".utils.AppUtils"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -11,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".activities.CinemaOrdersActivity"
+            android:label="@string/title_activity_cinema_orders"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

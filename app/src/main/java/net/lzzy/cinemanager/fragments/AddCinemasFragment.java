@@ -113,7 +113,7 @@ public class AddCinemasFragment extends BaseFragment implements View.OnClickList
 
     }
 
-    //6.实现方法
+    //6.调用方法
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);

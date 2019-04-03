@@ -1,6 +1,7 @@
 package net.lzzy.cinemanager.fragments;
 
 import android.app.AlertDialog;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -9,13 +10,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import androidx.annotation.Nullable;
+
 import net.lzzy.cinemanager.R;
 import net.lzzy.cinemanager.models.Cinema;
 import net.lzzy.cinemanager.models.CinemaFactory;
 import net.lzzy.cinemanager.models.Order;
 import net.lzzy.cinemanager.models.OrderFactory;
 import net.lzzy.cinemanager.utils.AppUtils;
-import net.lzzy.cinemanager.utils.ViewUtils;
 import net.lzzy.sqllib.GenericAdapter;
 import net.lzzy.sqllib.ViewHolder;
 
@@ -28,15 +30,28 @@ import java.util.List;
  */
 public class OrdersFragment extends BaseFragment {
     private static final float TOUCH_MIN_DISTANCE=100;
+    public static final String ORDER = "order";
     private static List<Order> orders=new ArrayList<>();
     private OrderFactory factory=OrderFactory.getInstance();
     private GenericAdapter<Order> adapter;
     private float touchX1;
     private boolean isDeleting=false;
     public Order order;
-    public OrdersFragment(){ }
-    public OrdersFragment(Order order){
-        this.order=order;
+
+    public static OrdersFragment newInstance(Order order){
+        OrdersFragment fragment=new OrdersFragment();
+        Bundle args=new Bundle();
+        args.putParcelable(ORDER,order);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments()!=null){
+            order= getArguments().getParcelable(ORDER);
+        }
     }
 
 
@@ -108,6 +123,10 @@ public class OrdersFragment extends BaseFragment {
             }
         };
         lv.setAdapter(adapter);
+        if (order!=null){
+            saveOrder(order);
+        }
+
     }
     public void saveOrder(Order order){
         adapter.add(order);
@@ -145,4 +164,5 @@ public class OrdersFragment extends BaseFragment {
         img.setImageBitmap(AppUtils.createQRCodeBitmap(content,300,300));
         new AlertDialog.Builder(getContext()).setView(view).show();
     }
+
 }

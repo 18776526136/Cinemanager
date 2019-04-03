@@ -6,4 +6,5 @@
     <dimen name="numberSize">20sp</dimen>
     <dimen name="roundCorner">6dp</dimen>
     <dimen name="shadow">4dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>
